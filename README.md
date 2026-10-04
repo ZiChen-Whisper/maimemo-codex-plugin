@@ -63,10 +63,10 @@ npx skills add ZiChen-Whisper/maimemo-codex-plugin
 
 ## 配置 token
 
-安装插件与配置墨墨账号是两步。**安装时不用把 token 写进插件。** 从墨墨 App「我的 → 更多设置 → 实验功能 → 开放 API」取得 token。若使用直接从 GitHub 安装的方式，运行安装缓存内的脚本（以下路径对应当前 0.1.1 版本；使用自定义 CODEX_HOME 时请调整路径）：
+安装插件与配置墨墨账号是两步。**安装时不用把 token 写进插件。** 从墨墨 App「我的 → 更多设置 → 实验功能 → 开放 API」取得 token。若使用直接从 GitHub 安装的方式，运行安装缓存内的脚本（以下路径对应当前 0.1.2 版本；使用自定义 CODEX_HOME 时请调整路径）：
 
 ```powershell
-$tokenSetupScript = Join-Path $env:USERPROFILE '.codex\plugins\cache\maimemo-community\maimemo-codex-plugin\0.1.1\scripts\configure.ps1'
+$tokenSetupScript = Join-Path $env:USERPROFILE '.codex\plugins\cache\maimemo-community\maimemo-codex-plugin\0.1.2\scripts\configure.ps1'
 powershell -NoProfile -ExecutionPolicy Bypass -File $tokenSetupScript
 ```
 

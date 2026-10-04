@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "maimemo-codex-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Connect Codex to the official MaiMemo vocabulary, notepad and study APIs.",
   "author": {
     "name": "ZiChen-Whisper"
@@ -15,7 +15,9 @@
         "developerName": "ZiChen-Whisper",
         "category": "Productivity",
         "capabilities": [],
-        "defaultPrompt": "检查墨墨连接，查询今天的学习进度。"
+        "defaultPrompt": "检查墨墨连接，查询今天的学习进度。",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png"
       }
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "maimemo-codex-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "通过墨墨官方 API 查词、整理云词本并复盘学习进度。非官方插件。",
   "author": {
     "name": "ZiChen-Whisper"
@@ -14,6 +14,8 @@
     "developerName": "ZiChen-Whisper",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "检查墨墨连接，查询今天的学习进度。"
+    "defaultPrompt": "检查墨墨连接，查询今天的学习进度。",
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/icon.png"
   }
 }
