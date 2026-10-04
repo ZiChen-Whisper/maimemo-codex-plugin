@@ -1,6 +1,6 @@
 ﻿param([switch]$Remove)
 $ErrorActionPreference = 'Stop'
-$tokenDirectory = Join-Path $env:USERPROFILE '.config\maimemo-plugin'
+$tokenDirectory = Join-Path $env:USERPROFILE '.config\maimemo-codex-plugin'
 $tokenPath = Join-Path $tokenDirectory 'token'
 if ($Remove) {
     if (Test-Path -LiteralPath $tokenPath) { Remove-Item -LiteralPath $tokenPath }

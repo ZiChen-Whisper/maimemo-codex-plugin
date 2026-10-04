@@ -8,7 +8,7 @@ description: 用户要连接墨墨背单词、查单词、整理或创建云词�
 工具以 `maimemo_` 为前缀；宿主可能再加服务器前缀。先发现工具并读取参数定义，不要凭记忆拼请求。
 
 - 初次连接先调用 `maimemo_connection_status`，再以 `maimemo_get_vocabulary` 查询 apple 验证远端。configured=true 仅代表本地已配置，不能称为连接成功。
-- token 只从环境变量 MAIMEMO_TOKEN 或用户目录 `.config/maimemo-plugin/token` 获取。不要读取或展示凭证文件；不要要求把 token 发到聊天。需要配置时运行 `scripts/configure.ps1` 隐藏输入。
+- token 只从环境变量 MAIMEMO_TOKEN 或用户目录 `.config/maimemo-codex-plugin/token` 获取。不要读取或展示凭证文件；不要要求把 token 发到聊天。需要配置时运行 `scripts/configure.ps1` 隐藏输入。
 - 查单词用 get_vocabulary（spelling），批量用 list_vocabulary（body.spellings / body.ids）。批量上限 1000，按返回结果区分找到、未找到和请求失败。
 - 整理文章或文件时先得到英文词汇候选、去重、检查词形。通过批量查询确认墨墨词库收录；保留未匹配词供用户核对，不猜测 ID。
 - 云词本先 list_notepads，再 get_notepad 读完整内容。创建使用 create_notepad 的 body.notepad；title、brief、content、status、tags 都必填。默认草稿 UNPUBLISHED，除非用户要求发布。

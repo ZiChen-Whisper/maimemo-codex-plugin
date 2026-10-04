@@ -4,7 +4,7 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import { MemoClient, catalog, loadToken } from './client.mjs';
 
 const client = new MemoClient();
-const server = new Server({ name: 'maimemo-plugin', version: '0.1.0' }, { capabilities: { tools: {} } });
+const server = new Server({ name: 'maimemo-codex-plugin', version: '0.1.1' }, { capabilities: { tools: {} } });
 const statusTool = { name: 'maimemo_connection_status', description: '检查本地 token 是否配置（不显示 token，也不验证远端有效性）。',
   inputSchema: { type: 'object', properties: {}, additionalProperties: false }, annotations: { readOnlyHint: true, openWorldHint: false } };
 server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [statusTool, ...catalog.tools.map(({ name, description, inputSchema, annotations }) => ({ name, description, inputSchema, annotations }))] }));

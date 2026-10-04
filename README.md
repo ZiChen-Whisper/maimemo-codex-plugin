@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/readme/hero.svg" width="100%" alt="MaiMemo：通过本地 MCP 在 Codex 中查词、管理云词本、复盘学习。token 保留在本机。"></p>
 
-# 墨墨背单词 · Codex 插件
+# maimemo-codex-plugin
 
 用自然语言查询墨墨单词、整理云词本、查看学习进度。**非官方开源插件**，使用[墨墨官方开放 API](https://open.maimemo.com/)。支持 Windows 本地 Codex；其他本地 MCP 客户端可使用 `mcp.json`，尚未实机验证。需要 Node.js 22 或更高版本。
 
@@ -29,26 +29,58 @@
 
 仓库已包含打包的运行文件，无须先安装 npm 依赖。安装前确认 `node --version` 至少为 22。
 
+推荐直接从 GitHub 添加插件源，无须手动 clone。需要支持 plugin marketplace 的新版 Codex CLI：
+
 ```powershell
-git clone https://github.com/ZiChen-Whisper/maimemo-plugin.git
-cd maimemo-plugin
-codex plugin marketplace add . --json
-codex plugin add maimemo-plugin@maimemo-community --json
+codex plugin marketplace add ZiChen-Whisper/maimemo-codex-plugin --json
+codex plugin add maimemo-codex-plugin@maimemo-community --json
 ```
 
-重新打开 Codex chat，检查插件列表中“墨墨背单词”已启用。若宿主提示信任/连接权限，按提示允许。此插件是本地进程，不能直接在 ChatGPT 网页或手机端运行；也不需要把 API token 上传到云端。
+如果要在本地修改源码，也可以先 clone：
+
+```powershell
+git clone https://github.com/ZiChen-Whisper/maimemo-codex-plugin.git
+cd maimemo-codex-plugin
+codex plugin marketplace add . --json
+codex plugin add maimemo-codex-plugin@maimemo-community --json
+```
+
+重新打开 Codex chat，检查插件列表中 `maimemo-codex-plugin` 已启用。若宿主提示信任/连接权限，按提示允许。此插件是本地进程，不能直接在 ChatGPT 网页或手机端运行；也不需要把 API token 上传到云端。若旧 CLI 无法解析配置或找不到插件，使用新版 CLI 或桌面版自带 CLI，见 [兼容性记录](docs/verification.md)。
+
+### plugin、skill、MCP 和 npm/npx
+
+按照 [OpenAI 的插件机制](https://developers.openai.com/plugins/concepts/plugins)，plugin 是可安装的能力包；skill 描述工作流程，MCP 服务器提供实际工具。本项目把两个 skill 和墨墨 API 工具打包在一起。GitHub 开源与发布到 OpenAI 公共插件目录是两件事：本项目目前通过自建 marketplace 分发，没有提交公共目录。
+
+`npm install` 安装 Node.js 软件包或依赖；`npx` 运行软件包中的命令。它们本身不会自动把一个目录注册成 Codex 插件。本项目尚未发布 npm 安装器，所以不能使用 `npx maimemo-codex-plugin` 安装完整插件。
+
+例如第三方 [skills CLI](https://www.skills.sh/docs/cli) 可以从 GitHub 安装 skill：
+
+```powershell
+npx skills add ZiChen-Whisper/maimemo-codex-plugin
+```
+
+这条命令只安装 skill，不会替你配置本项目的 MCP 服务器或 token。本项目的 skill 会调用墨墨 MCP 工具，所以正常使用请安装完整插件。这里仅解释命令区别，未运行该第三方安装命令。
 
 ## 配置 token
 
-安装插件与配置墨墨账号是两步。**安装时不用把 token 写进插件。** 从墨墨 App「我的 → 更多设置 → 实验功能 → 开放 API」取得 token，然后在仓库目录运行：
+安装插件与配置墨墨账号是两步。**安装时不用把 token 写进插件。** 从墨墨 App「我的 → 更多设置 → 实验功能 → 开放 API」取得 token。若使用直接从 GitHub 安装的方式，运行安装缓存内的脚本（以下路径对应当前 0.1.1 版本；使用自定义 CODEX_HOME 时请调整路径）：
+
+```powershell
+$tokenSetupScript = Join-Path $env:USERPROFILE '.codex\plugins\cache\maimemo-community\maimemo-codex-plugin\0.1.1\scripts\configure.ps1'
+powershell -NoProfile -ExecutionPolicy Bypass -File $tokenSetupScript
+```
+
+若已 clone 仓库，也可以在仓库目录运行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\configure.ps1
 ```
 
-按提示隐藏输入。脚本保存到 `%USERPROFILE%\.config\maimemo-plugin\token`，限制 Windows 目录权限为当前用户；文件是受文件权限保护的明文，并非加密凭证保险库。不要共享这个文件。替换 token 时重新运行同一脚本，移除用 `-Remove`。
+按提示隐藏输入。脚本保存到 `%USERPROFILE%\.config\maimemo-codex-plugin\token`，限制 Windows 目录权限为当前用户；文件是受文件权限保护的明文，并非加密凭证保险库。不要共享这个文件。替换 token 时重新运行同一脚本，移除用 `-Remove`。
 
-也支持 `MAIMEMO_TOKEN` 环境变量，优先级高于凭证文件。需要启动 Codex 的进程能继承该变量；修改环境后重启 Codex。Linux/macOS 可在相同用户目录创建 `~/.config/maimemo-plugin/token` 并设置目录 700、文件 600，或使用环境变量；该路径尚未实机验证。不要把 token 写进 `.mcp.json`、源码或聊天。
+从旧名称升级时，原来的 `.config/maimemo-plugin/token` 仍可读取，无须重新输入。优先级为环境变量、新凭证文件、旧凭证文件。删除旧凭证需单独移除旧文件；`configure.ps1 -Remove` 只移除新路径文件。
+
+也支持 `MAIMEMO_TOKEN` 环境变量，优先级高于凭证文件。需要启动 Codex 的进程能继承该变量；修改环境后重启 Codex。Linux/macOS 可在相同用户目录创建 `~/.config/maimemo-codex-plugin/token` 并设置目录 700、文件 600，或使用环境变量；该路径尚未实机验证。不要把 token 写进 `.mcp.json`、源码或聊天。
 
 ## 第一次使用
 

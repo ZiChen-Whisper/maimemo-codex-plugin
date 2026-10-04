@@ -11,6 +11,14 @@
 - Codex Desktop 自带 CLI 0.160.0 安装插件成功；安装来源 maimemo-community，版本 0.1.0。
 - README 图片引用及 SVG 基本结构通过 audit_readme.py。
 
+## 0.1.1 更名
+
+- 插件标识、界面名称、npm 项目名、MCP 服务器身份、GitHub 仓库和本地源目录统一为 maimemo-codex-plugin。
+- 旧凭证文件保持兼容；无需重新输入 token。新名称的凭证目录用于后续配置。
+- 11 项单元测试、manifest 一致性检查和打包 MCP 启动通过。
+- 本机旧标识安装移除，新标识 0.1.1 重新安装；工具发现仍为 25 个。
+- README 补充 GitHub 直接添加 marketplace 的安装方式，以及 skill-only npx 命令的适用范围。
+
 ## 验证边界
 
 - 没有对真实账号执行创建、修改、删除、加词或提前复习。这些工具按官方 schema 实现并做本地请求测试，尚未验证每个写接口的实际业务结果。

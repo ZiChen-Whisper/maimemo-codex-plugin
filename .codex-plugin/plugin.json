@@ -1,12 +1,14 @@
 {
-  "name": "maimemo-plugin",
-  "version": "0.1.0",
+  "name": "maimemo-codex-plugin",
+  "version": "0.1.1",
   "description": "通过墨墨官方 API 查词、整理云词本并复盘学习进度。非官方插件。",
-  "author": { "name": "ZiChen-Whisper" },
+  "author": {
+    "name": "ZiChen-Whisper"
+  },
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "墨墨背单词",
+    "displayName": "maimemo-codex-plugin",
     "shortDescription": "查词、整理云词本与复盘学习进度",
     "longDescription": "本地 MCP 连接墨墨背单词 API，token 保留在本机。",
     "developerName": "ZiChen-Whisper",

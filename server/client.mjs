@@ -4,11 +4,15 @@ import { join } from 'node:path';
 import Ajv from 'ajv';
 
 export const catalog = JSON.parse(readFileSync(new URL('./catalog.json', import.meta.url), 'utf8'));
-export const credentialPath = join(homedir(), '.config', 'maimemo-plugin', 'token');
+export const credentialPath = join(homedir(), '.config', 'maimemo-codex-plugin', 'token');
+const legacyCredentialPath = join(homedir(), '.config', 'maimemo-plugin', 'token');
 export function loadToken() {
   const env = process.env.MAIMEMO_TOKEN?.trim();
   if (env) return env;
-  try { return readFileSync(credentialPath, 'utf8').trim(); } catch { return ''; }
+  for (const path of [credentialPath, legacyCredentialPath]) {
+    try { return readFileSync(path, 'utf8').trim(); } catch {}
+  }
+  return '';
 }
 const ajv = new Ajv({ strict: false, allErrors: true });
 const validators = new Map(catalog.tools.map(t => [t.name, ajv.compile(t.inputSchema)]));

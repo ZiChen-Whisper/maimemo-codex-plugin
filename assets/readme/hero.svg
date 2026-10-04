@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-labelledby="title desc">
-  <title id="title">MaiMemo · 墨墨背单词插件</title>
+  <title id="title">maimemo-codex-plugin · 墨墨背单词</title>
   <desc id="desc">Codex 通过本地 MCP 访问墨墨官方 API，token 保留在本机。查词、云词本、学习复盘。</desc>
   <rect width="1200" height="330" rx="16" fill="#f4f1e9"/>
   <g font-family="Segoe UI,Microsoft YaHei,sans-serif" fill="#223d33">
-    <text x="60" y="64" font-size="22" letter-spacing="3">WORDS → NOTEBOOKS → REVIEW</text>
+    <text x="60" y="64" font-size="22" letter-spacing="3">maimemo-codex-plugin</text>
     <text x="56" y="147" font-size="66" font-weight="650">MaiMemo</text>
     <text x="60" y="200" font-size="30">在 Codex 中使用墨墨背单词</text>
     <text x="60" y="274" font-size="22" fill="#506359">24 API tools · 2 skills · Local credentials</text>
