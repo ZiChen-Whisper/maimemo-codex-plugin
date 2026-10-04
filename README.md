@@ -6,59 +6,19 @@
 
 在 **ChatGPT 桌面版（原 Codex 桌面版）**中，用自然语言连接墨墨背单词：把阅读生词整理成云词本、查看今天还没背完的词、根据真实学习数据做自测。**非官方开源插件**，使用[墨墨官方开放 API](https://open.maimemo.com/)。
 
-安装好后，新开一个本地 chat，复制这句话开始：
-
-```text
-使用 maimemo-codex-plugin 检查墨墨连接，再查询 resilient 是否被墨墨词库收录。
-如果查到释义和例句，请展示；查不到时不要编造。只读取，不修改数据。
-```
-
-包含 **24 个 API 工具 + 1 个本地配置检查工具、2 个 skill**。本文先介绍桌面安装和使用；CLI、开发与工具参数放在后面。
-
-<a id="overview"></a>
-
-## ![适用范围](assets/readme/section-01.svg)
-
-| 项目 | 当前情况 |
-| --- | --- |
-| ChatGPT 桌面版 | 主要入口；本地 Codex chat / 可以执行本地工具的工作环境 |
-| 已验证系统 | Windows；安装、MCP 启动与三个真实读取接口已验证 |
-| 运行依赖 | Node.js 22 或更高版本；添加 GitHub 插件源还需要可用的 Git |
-| 墨墨账号 | 自己的开放 API token，与 ChatGPT 登录是两回事 |
-| 网页、手机端 | 本项目是本地 stdio MCP，不能直接在这些环境运行 |
-| macOS、Linux、其他 MCP 客户端 | 尚未实机验证；便携配置在 mcp.json |
-
-“让 ChatGPT 安装”需要能访问本机文件、执行命令的本地 chat。普通网页聊天不能代办本机安装。桌面某些入口仍显示 Codex，CLI 命令仍叫 `codex`，仓库名中的 codex 也继续保留。
-
 <a id="desktop-install"></a>
 
-## ![ChatGPT 桌面版怎么安装](assets/readme/section-02.svg)
+## ![ChatGPT 桌面版怎么安装](assets/readme/section-01.svg)
 
 ### ![推荐：复制这段话，让 ChatGPT 帮你安装](assets/readme/topic-01.svg)
 
-在桌面版打开一个本地 Codex chat，选择一个本地文件夹，把下面整段发给 ChatGPT。如果当前 chat 没有文件或终端工具，先切换到能执行本机任务的环境。
+在 ChatGPT 桌面版或 Codex 的本地聊天中，把这句话发给它：
 
 ```text
-请在当前电脑为 ChatGPT 桌面版安装这个完整插件：
-https://github.com/ZiChen-Whisper/maimemo-codex-plugin
-
-先读取 README 和插件配置，检查 Node.js >=22、Git 及桌面版的插件安装能力。
-使用官方支持的 marketplace 流程，把 maimemo-community 插件源加入当前用户，
-安装并启用 maimemo-codex-plugin。我要完整插件，不能只安装两个 skill。
-
-优先使用桌面版自带的 codex 可执行文件。旧独立 CLI 如果不兼容，不要修改我的全局配置
-来绕过。保留其他插件和配置。如果已经有同名插件源，先检查来源和版本，不擅自替换
-或移除。缺少依赖或需要我点击权限提示时，告诉我具体怎么做。
-
-token 不要让我发到聊天里，也不要展示已有 token。尚未配置时，请定位已安装插件里的
-scripts/configure.ps1，让我在可操作的本地终端中隐藏输入。不要伪造网页授权流程。
-
-安装后检查 MCP 能启动并发现 25 个工具。当前 chat 不能加载新工具时，告诉我要新开
-chat。有了工具和 token 后，只查询 apple 验证连接，不修改墨墨数据。
-最后告诉我从哪里查看插件，以及下一句话该怎么开始使用。
+请帮我安装这个插件：https://github.com/ZiChen-Whisper/maimemo-codex-plugin
 ```
 
-这段话让 ChatGPT 代办本机安装，不会把墨墨 token 上传到 GitHub。不同桌面版本的工具和权限不同；不能执行命令时，可以按下面的流程操作。
+助手会读取本仓库的安装说明。安装需要能访问本机文件、执行命令的聊天环境；安装完成后，按[连接账号](#connect-account)配置自己的墨墨 token。
 
 ### ![官方支持的流程：一行添加插件源，再在界面安装](assets/readme/topic-02.svg)
 
@@ -86,6 +46,23 @@ codex plugin marketplace add ZiChen-Whisper/maimemo-codex-plugin --json
 当前没有发布 `npx maimemo-codex-plugin` 安装器。完整插件请用上述安装请求或官方 marketplace 流程。
 
 `npx skills add ZiChen-Whisper/maimemo-codex-plugin` 使用第三方 skills CLI，只装 skill，不配置墨墨 MCP 或 token，不能替代完整插件。`npm ci` 用于开发者安装依赖，普通桌面用户不用执行。
+
+<a id="overview"></a>
+
+## ![适用范围](assets/readme/section-02.svg)
+
+包含 **24 个 API 工具 + 1 个本地配置检查工具、2 个 skill**。
+
+| 项目 | 当前情况 |
+| --- | --- |
+| ChatGPT 桌面版 | 主要入口；本地 Codex chat / 可以执行本地工具的工作环境 |
+| 已验证系统 | Windows；安装、MCP 启动与三个真实读取接口已验证 |
+| 运行依赖 | Node.js 22 或更高版本；添加 GitHub 插件源还需要可用的 Git |
+| 墨墨账号 | 自己的开放 API token，与 ChatGPT 登录是两回事 |
+| 网页、手机端 | 本项目是本地 stdio MCP，不能直接在这些环境运行 |
+| macOS、Linux、其他 MCP 客户端 | 尚未实机验证；便携配置在 mcp.json |
+
+“让 ChatGPT 安装”需要能访问本机文件、执行命令的本地 chat。普通网页聊天不能代办本机安装。桌面某些入口仍显示 Codex，CLI 命令仍叫 `codex`，仓库名中的 codex 也继续保留。
 
 <a id="connect-account"></a>
 
@@ -130,6 +107,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<插件安装目录>\script
 ## ![在桌面聊天里怎么使用](assets/readme/section-04.svg)
 
 安装、启用并配置后，**新开 chat**。直接写“使用墨墨插件……”即可；也可键入 `@`，从选择器选中 **maimemo-codex-plugin** 或其 skill，再描述需求。应从选择器选中，单纯粘贴 `@名称` 不等于选中插件。[官方调用方式](https://learn.chatgpt.com/docs/plugins)
+
+安装好后，新开一个本地 chat，复制这句话开始：
+
+```text
+使用 maimemo-codex-plugin 检查墨墨连接，再查询 resilient 是否被墨墨词库收录。
+如果查到释义和例句，请展示；查不到时不要编造。只读取，不修改数据。
+```
 
 以下提示词可直接复制。词本名称是示例，请替换成自己的名称；有同名词本时先选定 ID。
 

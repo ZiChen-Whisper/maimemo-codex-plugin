@@ -29,8 +29,8 @@ const hero = svg('maimemo-codex-plugin：在 ChatGPT 桌面版中使用墨墨背
 writeFileSync(`${assets}/hero.svg`,hero);
 
 const sections = [
+  ['ChatGPT 桌面版怎么安装','如何安装','INSTALL ON DESKTOP','desktop-install'],
   ['适用范围','适用范围','BEFORE YOU START','overview'],
-  ['ChatGPT 桌面版怎么安装','桌面安装','INSTALL ON DESKTOP','desktop-install'],
   ['连接你的墨墨账号','连接你的墨墨账号','CONNECT YOUR ACCOUNT','connect-account'],
   ['在桌面聊天里怎么使用','从第一句，到日常使用','12 WORKFLOWS / COPY & TRY','examples'],
   ['功能与限制','功能与边界','CAPABILITIES & LIMITS','capabilities'],
@@ -77,7 +77,7 @@ for(const [i,[original,title,n,label]] of subtitles.entries()) {
   <text x="96" y="58" font-family="${sans}" font-size="43" font-weight="600" fill="#2b3c33">${escape(title)}</text>
   <text x="1180" y="54" text-anchor="end" font-family="${sans}" font-size="19" letter-spacing="1" fill="#647c6e">${escape(label)}</text>`));
 }
-let readme=readFileSync('README.md','utf8');
+let readme=readFileSync('README.md','utf8').replaceAll('\r\n','\n');
 // Revert generated heading markup first so the generator is idempotent.
 readme=readme.replace(/<a id="[^"\n]+"><\/a>\n\n/g,'');
 readme=readme.replace(/^(#{2,3}) !\[([^\]]+)\]\(assets\/readme\/(?:section|topic)-\d+\.svg\)$/gm,'$1 $2');
