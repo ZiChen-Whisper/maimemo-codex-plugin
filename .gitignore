@@ -1,0 +1,10 @@
+node_modules/
+reference/
+.env
+.env.*
+!.env.example
+*.log
+*.zip
+__pycache__/
+output/
+.playwright-cli/

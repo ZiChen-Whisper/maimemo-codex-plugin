@@ -1,0 +1,17 @@
+{
+  "name": "maimemo-plugin",
+  "version": "0.1.0",
+  "description": "通过墨墨官方 API 查词、整理云词本并复盘学习进度。非官方插件。",
+  "author": { "name": "ZiChen-Whisper" },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "墨墨背单词",
+    "shortDescription": "查词、整理云词本与复盘学习进度",
+    "longDescription": "本地 MCP 连接墨墨背单词 API，token 保留在本机。",
+    "developerName": "ZiChen-Whisper",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "检查墨墨连接，查询今天的学习进度。"
+  }
+}

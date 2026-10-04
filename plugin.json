@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "maimemo-plugin",
+  "version": "0.1.0",
+  "description": "Connect Codex to the official MaiMemo vocabulary, notepad and study APIs.",
+  "author": { "name": "ZiChen-Whisper" },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "墨墨背单词",
+        "shortDescription": "查词、整理云词本与复盘学习进度",
+        "longDescription": "本地 MCP 工具连接墨墨官方 API，包含词汇、云词本、例句、助记、释义及公测学习接口，配有词汇整理和学习复盘技能。非官方插件。",
+        "developerName": "ZiChen-Whisper",
+        "category": "Productivity",
+        "capabilities": [],
+        "defaultPrompt": "检查墨墨连接，查询今天的学习进度。"
+      }
+    }
+  }
+}

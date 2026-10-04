@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "maimemo": {
+      "command": "node",
+      "env_vars": ["MAIMEMO_TOKEN"],
+      "args": ["${CLAUDE_PLUGIN_ROOT}/server/dist/index.mjs"],
+      "cwd": "${CLAUDE_PLUGIN_ROOT}"
+    }
+  }
+}
