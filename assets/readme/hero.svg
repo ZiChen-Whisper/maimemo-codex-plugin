@@ -1,18 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-labelledby="title desc">
-  <title id="title">maimemo-codex-plugin · 墨墨背单词</title>
-  <desc id="desc">ChatGPT 桌面版通过本地 MCP 访问墨墨官方 API，token 保留在本机。查词、云词本、学习复盘。</desc>
-  <rect width="1200" height="330" rx="16" fill="#f4f1e9"/>
-  <g font-family="Segoe UI,Microsoft YaHei,sans-serif" fill="#223d33">
-    <text x="60" y="64" font-size="22" letter-spacing="3">maimemo-codex-plugin</text>
-    <text x="56" y="147" font-size="66" font-weight="650">MaiMemo</text>
-    <text x="60" y="200" font-size="30">在 ChatGPT 桌面版中使用墨墨</text>
-    <text x="60" y="274" font-size="22" fill="#506359">24 API tools · 2 skills · Local credentials</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">maimemo-codex-plugin：在 ChatGPT 桌面版中使用墨墨背单词</title>
+  <desc id="desc">maimemo-codex-plugin：在 ChatGPT 桌面版中使用墨墨背单词 · maimemo-codex-plugin README</desc>
+  <rect width="1200" height="420" rx="24" fill="#262d2b"/>
+  <g id="wordmark" font-family="Segoe UI,Microsoft YaHei,PingFang SC,sans-serif">
+    <text x="56" y="61" font-size="21" letter-spacing="2" fill="#a6c6b6">MAIMEMO-CODEX-PLUGIN / CHATGPT DESKTOP</text>
+    <text x="50" y="203" font-size="132" font-weight="750" letter-spacing="-7" fill="#faf9f4">maimemo<tspan fill="#64b69a">.</tspan></text>
+    <text x="56" y="267" font-size="37" fill="#faf9f4">把你的词本，带进每一次对话。</text>
+    <text x="56" y="365" font-size="28" fill="#b0d3bf">24 API 工具</text>
+    <text x="256" y="365" font-size="28" fill="#b0d3bf">2 个 skill</text>
+    <text x="446" y="365" font-size="23" fill="#c6d1c9">本地 token · 非官方插件</text>
   </g>
-  <g transform="translate(790 78)" font-family="Segoe UI,Microsoft YaHei,sans-serif">
-    <path d="M0 5h300v195H0z" fill="#e2e9df"/>
-    <path d="M24 40h250M24 102h250M24 164h250" stroke="#bdcdbd" stroke-width="2"/>
-    <text x="24" y="32" font-size="24" fill="#223d33">ChatGPT Desktop</text>
-    <text x="24" y="94" font-size="24" fill="#223d33">Local MCP</text>
-    <text x="24" y="156" font-size="24" fill="#223d33">MaiMemo API</text>
+  <g id="vocabulary-card" transform="translate(818 72)" font-family="Segoe UI,Microsoft YaHei,PingFang SC,sans-serif">
+    <rect x="13" y="13" width="300" height="282" rx="16" fill="#41564c"/>
+    <rect width="300" height="282" rx="16" fill="#f5f2e9"/>
+    <path d="M235 0h38v58l-19-12-19 12z" fill="#197d64"/>
+    <text x="28" y="43" font-size="18" letter-spacing="2" fill="#60756b">WORD NOTEBOOK</text>
+    <text x="27" y="112" font-size="45" font-weight="650" letter-spacing="-1" fill="#263d33">resilient</text>
+    <path d="M28 139h244" stroke="#d2ddd1" stroke-width="2"/>
+    <text x="28" y="179" font-size="26" fill="#54685c">sustain</text>
+    <text x="28" y="217" font-size="26" fill="#54685c">comprise</text>
+    <text x="28" y="258" font-size="21" fill="#197d64">查词 → 云词本 → 学习复盘</text>
   </g>
 </svg>

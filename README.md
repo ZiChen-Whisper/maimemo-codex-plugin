@@ -1,6 +1,8 @@
-<p align="center"><img src="assets/readme/hero.svg" width="100%" alt="MaiMemo：在 ChatGPT 桌面版中查词、整理云词本和复盘学习。token 保留在本机。"></p>
+# ![maimemo-codex-plugin · 在 ChatGPT 桌面版使用墨墨](assets/readme/hero.svg)
 
-# maimemo-codex-plugin
+<p align="center">
+  <a href="#desktop-install">桌面安装</a> · <a href="#connect-account">连接账号</a> · <a href="#examples">12 个使用示例</a> · <a href="#troubleshooting">连接排查</a>
+</p>
 
 在 **ChatGPT 桌面版（原 Codex 桌面版）**中，用自然语言连接墨墨背单词：把阅读生词整理成云词本、查看今天还没背完的词、根据真实学习数据做自测。**非官方开源插件**，使用[墨墨官方开放 API](https://open.maimemo.com/)。
 
@@ -13,7 +15,9 @@
 
 包含 **24 个 API 工具 + 1 个本地配置检查工具、2 个 skill**。本文先介绍桌面安装和使用；CLI、开发与工具参数放在后面。
 
-## 适用范围
+<a id="overview"></a>
+
+## ![适用范围](assets/readme/section-01.svg)
 
 | 项目 | 当前情况 |
 | --- | --- |
@@ -26,9 +30,11 @@
 
 “让 ChatGPT 安装”需要能访问本机文件、执行命令的本地 chat。普通网页聊天不能代办本机安装。桌面某些入口仍显示 Codex，CLI 命令仍叫 `codex`，仓库名中的 codex 也继续保留。
 
-## ChatGPT 桌面版怎么安装
+<a id="desktop-install"></a>
 
-### 推荐：复制这段话，让 ChatGPT 帮你安装
+## ![ChatGPT 桌面版怎么安装](assets/readme/section-02.svg)
+
+### ![推荐：复制这段话，让 ChatGPT 帮你安装](assets/readme/topic-01.svg)
 
 在桌面版打开一个本地 Codex chat，选择一个本地文件夹，把下面整段发给 ChatGPT。如果当前 chat 没有文件或终端工具，先切换到能执行本机任务的环境。
 
@@ -54,7 +60,7 @@ chat。有了工具和 token 后，只查询 apple 验证连接，不修改墨�
 
 这段话让 ChatGPT 代办本机安装，不会把墨墨 token 上传到 GitHub。不同桌面版本的工具和权限不同；不能执行命令时，可以按下面的流程操作。
 
-### 官方支持的流程：一行添加插件源，再在界面安装
+### ![官方支持的流程：一行添加插件源，再在界面安装](assets/readme/topic-02.svg)
 
 在可用的本地终端执行：
 
@@ -75,15 +81,17 @@ codex plugin marketplace add ZiChen-Whisper/maimemo-codex-plugin --json
 
 **官方支持的安装机制与官方公共目录是两件事。** 本项目通过 GitHub 自建源分发，尚未提交 OpenAI 公共目录，因此添加来源前不能靠全局搜索找到它；目前没有可点击即完成首次安装的公共目录链接。
 
-### npm / npx 能安装吗？
+### ![npm / npx 能安装吗？](assets/readme/topic-03.svg)
 
 当前没有发布 `npx maimemo-codex-plugin` 安装器。完整插件请用上述安装请求或官方 marketplace 流程。
 
 `npx skills add ZiChen-Whisper/maimemo-codex-plugin` 使用第三方 skills CLI，只装 skill，不配置墨墨 MCP 或 token，不能替代完整插件。`npm ci` 用于开发者安装依赖，普通桌面用户不用执行。
 
-## 连接你的墨墨账号
+<a id="connect-account"></a>
 
-### 获取并隐藏输入 token
+## ![连接你的墨墨账号](assets/readme/section-03.svg)
+
+### ![获取并隐藏输入 token](assets/readme/topic-04.svg)
 
 在墨墨背单词 App 打开 **我的 → 更多设置 → 实验功能 → 开放 API**，取得自己的 token。桌面版安装的权限提示不等于已经连接墨墨；本插件不提供“使用 ChatGPT 登录墨墨”的流程。
 
@@ -111,19 +119,21 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<插件安装目录>\script
 
 `configured=true` 只表示本地有 token；成功查询 apple 才验证了远端凭证。
 
-### 更换或移除 token
+### ![更换或移除 token](assets/readme/topic-05.svg)
 
 重新运行脚本更换 token，传入 `-Remove` 移除新路径文件。也支持 `MAIMEMO_TOKEN` 环境变量，启动桌面应用的进程必须能继承它；修改后重启应用。
 
 仍兼容旧目录 `.config/maimemo-plugin/token`。优先级为环境变量、新文件、旧文件；完全断开时需清除实际使用的来源，`-Remove` 只移除新文件。不要让助手读取或展示凭证文件。
 
-## 在桌面聊天里怎么使用
+<a id="examples"></a>
+
+## ![在桌面聊天里怎么使用](assets/readme/section-04.svg)
 
 安装、启用并配置后，**新开 chat**。直接写“使用墨墨插件……”即可；也可键入 `@`，从选择器选中 **maimemo-codex-plugin** 或其 skill，再描述需求。应从选择器选中，单纯粘贴 `@名称` 不等于选中插件。[官方调用方式](https://learn.chatgpt.com/docs/plugins)
 
 以下提示词可直接复制。词本名称是示例，请替换成自己的名称；有同名词本时先选定 ID。
 
-### 1. 查一个词，并读懂它
+### ![1. 查一个词，并读懂它](assets/readme/topic-06.svg)
 
 ```text
 使用墨墨插件查询 resilient。确认是否收录，再读取可用的释义、例句和助记。
@@ -132,7 +142,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<插件安装目录>\script
 
 **结果：** 聊天里显示词库 ID、拼写及可用素材。基本查词接口只返回 ID 和拼写，其他素材需另查；为空时 AI 可以补写解释，但不能说是墨墨返回的内容。
 
-### 2. 批量检查一组生词
+### ![2. 批量检查一组生词](assets/readme/topic-07.svg)
 
 ```text
 用墨墨插件批量查询 resilient、sustain、comprise、sustian。
@@ -141,7 +151,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<插件安装目录>\script
 
 **结果：** 得到查询与未匹配清单。后续加词使用实际返回的 ID，不能猜测 ID。
 
-### 3. 从阅读材料提取生词
+### ![3. 从阅读材料提取生词](assets/readme/topic-08.svg)
 
 ```text
 从这段文章挑出适合六级的词汇，去重、检查词形，再用墨墨插件查询是否收录。
@@ -152,7 +162,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 聊天里显示候选清单。也可以附上自己的文章或文件，助手需要能读取该附件或本地文件。
 
-### 4. 保存为云词本草稿
+### ![4. 保存为云词本草稿](assets/readme/topic-09.svg)
 
 ```text
 把 resilient、sustain、comprise 创建为新的墨墨云词本草稿。
@@ -162,7 +172,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 真实创建云词本，状态 `UNPUBLISHED`。需要发布时继续说“将刚才 ID 为……的词本设为已发布，保留内容不变”，再在 App 检查同步结果。失败不能当成已保存。
 
-### 5. 查看词本，并追加单词
+### ![5. 查看词本，并追加单词](assets/readme/topic-10.svg)
 
 先找词本：
 
@@ -180,7 +190,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 第二步真实更新词本，不另建词本，不把原来的内容覆盖成两个新词。
 
-### 6. 加入墨墨学习计划
+### ![6. 加入墨墨学习计划](assets/readme/topic-11.svg)
 
 ```text
 将 resilient、sustain、comprise 加入我的墨墨学习计划，不提前复习。
@@ -189,7 +199,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 改变学习计划。保存云词本不等于加入学习计划；重复词和容量上限会影响成功数量。
 
-### 7. 今天背了多少、还剩多少
+### ![7. 今天背了多少、还剩多少](assets/readme/topic-12.svg)
 
 ```text
 读取墨墨今日进度，告诉我已完成、今日总量、剩余数量及学习时长，把毫秒换成分钟。
@@ -198,7 +208,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 按真实 `finished`、`total`、`study_time` 汇总。进度接口不直接给新学/复习分项，需要分项时再查今日单词列表。
 
-### 8. 用未完成的词做自测
+### ![8. 用未完成的词做自测](assets/readme/topic-13.svg)
 
 ```text
 用墨墨插件读取今天未完成的词，最多选 10 个，区分新学和复习。只获取了部分列表时
@@ -207,7 +217,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 在聊天里逐题练习。判分是聊天辅导，**不会写回墨墨的记忆等级、答题反馈或打卡记录**；当前 API 没有这些写入能力。
 
-### 9. 查看某个词的学习记录
+### ![9. 查看某个词的学习记录](assets/readme/topic-14.svg)
 
 ```text
 查我对 resilient 的墨墨学习记录，展示实际返回的学习次数、最近学习时间、下次学习
@@ -216,7 +226,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 读取已有记录，不修改复习安排。它不是完整历史事件导出，不能据此编造几周的学习曲线。
 
-### 10. 看明天计划复习的词
+### ![10. 看明天计划复习的词](assets/readme/topic-15.svg)
 
 ```text
 用墨墨插件按北京时间查询明天 00:00:00 到 23:59:59 的下次学习计划。
@@ -225,7 +235,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 按 `next_study_date` 筛选记录。“明天”按请求发起日期计算，不是固定示例日期。
 
-### 11. 编例句，确认后保存
+### ![11. 编例句，确认后保存](assets/readme/topic-16.svg)
 
 先生成：
 
@@ -243,7 +253,7 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 第二步真实创建例句。助记、释义也有对应工具；写入须有明确内容，并填写接口要求的类型或状态。
 
-### 12. 提前复习已有单词
+### ![12. 提前复习已有单词](assets/readme/topic-17.svg)
 
 ```text
 用墨墨插件将 resilient 和 sustain 提前到现在复习。先确认它们在我的学习记录中，
@@ -252,13 +262,15 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 **结果：** 真实调整复习安排。官方说明需达到 10 级解锁，公测期间仍以实际接口结果为准。
 
-### 第一次建议这样走
+### ![第一次建议这样走](assets/readme/topic-18.svg)
 
 先 **1 查词 → 2 批量核对 → 4 建草稿 → 5 查看词本 → 7 看进度 → 8 自测**。想真正开始背新词，再做 **6 加入学习计划**。也可以只用查询与聊天辅导。
 
 写操作需明确对象和动作；工具还要求 `confirm=true`，由助手根据授权传入。已有清楚授权无须重复询问；该字段只是调用方声明，不代替宿主权限。写入超时先查结果，避免重复创建。
 
-## 功能与限制
+<a id="capabilities"></a>
+
+## ![功能与限制](assets/readme/section-05.svg)
 
 | 功能 | 内容 | 数据影响 |
 | --- | --- | --- |
@@ -270,7 +282,9 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 学习接口需 App 开启自动同步，当天打开 App 初始化，公测期间可用性可能变化。不含墨墨记忆卡 Markji、模拟手机按钮、自动答题或自动打卡。写工具已按官方 schema 做本地请求测试，尚未逐一对真实账号写入验收，见[验证范围](docs/verification.md)。
 
-## 连接失败时
+<a id="troubleshooting"></a>
+
+## ![连接失败时](assets/readme/section-06.svg)
 
 | 现象 | 怎么处理 |
 | --- | --- |
@@ -286,9 +300,11 @@ A resilient economy can sustain growth, but accurate forecasts comprise many unc
 
 按进程串行调用，间隔至少 2 秒，不自动重试写操作。官方频控为 10 秒 20 次、60 秒 40 次、背单词 5 小时 2000 次；例句、助记、释义每天最多合计创建 600 条。多个进程与持续调用仍可能触发累计限制。
 
-## CLI 与开发者入口
+<a id="developers"></a>
 
-### 使用新版 CLI 直接安装
+## ![CLI 与开发者入口](assets/readme/section-07.svg)
+
+### ![使用新版 CLI 直接安装](assets/readme/topic-19.svg)
 
 ```powershell
 codex plugin marketplace add ZiChen-Whisper/maimemo-codex-plugin --json
@@ -306,7 +322,7 @@ codex plugin add maimemo-codex-plugin@maimemo-community --json
 
 Git 来源用 `codex plugin marketplace upgrade maimemo-community` 刷新，然后在 Plugins 核对新版本并更新/重新安装。刷新来源和更新已安装副本是两步；本地目录来源修改源文件后重新安装。
 
-### 开发验证
+### ![开发验证](assets/readme/topic-20.svg)
 
 ```powershell
 npm ci
@@ -325,7 +341,9 @@ python scripts/generate_catalog.py <你的官方YML路径>
 npm run build
 ```
 
-## 隐私与许可证
+<a id="privacy"></a>
+
+## ![隐私与许可证](assets/readme/section-08.svg)
 
 请求只发送到 `https://open.maimemo.com/open`，拒绝重定向，token 只用于 Authorization。插件无遥测，不在磁盘记录 API 响应。词本与学习数据会进入发起调用的 AI chat；聊天同步由宿主设置决定。
 

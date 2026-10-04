@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="144" viewBox="0 0 1200 144" role="img" aria-labelledby="title desc">
+  <title id="title">适用范围</title>
+  <desc id="desc">适用范围 · maimemo-codex-plugin README</desc>
+  <rect width="1200" height="144" rx="16" fill="#f4f2eb"/>
+  <path d="M48 0h34v41L65 32 48 41z" fill="#197d64"/>
+  <g font-family="Segoe UI,Microsoft YaHei,PingFang SC,sans-serif">
+    <text x="102" y="41" font-size="19" letter-spacing="2" fill="#647c6e">BEFORE YOU START</text>
+    <text x="48" y="108" font-size="48" font-weight="650" fill="#29392f">适用范围</text>
+    <text x="1116" y="112" text-anchor="end" font-size="78" font-weight="700" fill="#d0ddd2">01</text>
+  </g>
+</svg>
